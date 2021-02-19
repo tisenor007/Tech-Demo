@@ -5,6 +5,7 @@ using UnityEngine;
 public class NonRespawnCollectable : MonoBehaviour
 {
     // Start is called before the first frame update
+    public AudioSource pickupsound;
     void Start()
     {
         
@@ -12,6 +13,7 @@ public class NonRespawnCollectable : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
+        pickupsound.Play();
     }
     // Update is called once per frame
     void Update()

@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public Vector3 SpawnPosition;
     //public Vector3 DefaultSpawnPos;
     public GameObject player;
+    public AudioSource pickupsound;
+    public AudioSource death;
+    public AudioSource Checkpoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "Killbox")
         {
             player.transform.position = SpawnPosition;
+            death.Play();
         }
         if (other.gameObject.tag == "Checkpoint")
         {
@@ -27,10 +31,20 @@ public class Player : MonoBehaviour
             Debug.Log("Check Point Set!");
             SpawnPosition = player.transform.position;
             Debug.Log(SpawnPosition);
+            Checkpoint.Play();
         }
         if (other.gameObject.tag == "Pickups")
         {
             other.gameObject.GetComponent<RespawnCollectable>().collected = true;
+            pickupsound.Play();
+        }
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            player.transform.position = SpawnPosition;
+            death.Play();
         }
     }
     private void OnTriggerExit(Collider other)

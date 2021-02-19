@@ -8,6 +8,7 @@ public class Teleportation : MonoBehaviour
     public GameObject Player;
     private Vector3 destination;
     public int direction;
+    public AudioSource portalsound;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class Teleportation : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Player.transform.position = destination;
+        portalsound.Play();
     }
 
     // Update is called once per frame

@@ -10,6 +10,7 @@ public class DoorTrig : MonoBehaviour
     public float openPos;
     public Vector3 position;
     public int speed = 2;
+    public AudioSource doorsound;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,12 @@ public class DoorTrig : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         dooropen = true;
+        doorsound.Play();
     }
     public void OnTriggerExit(Collider other)
     {
         dooropen = false;
+        doorsound.Play();
     }
     // Update is called once per frame
     void Update()
