@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
             SpawnPosition = player.transform.position;
             Debug.Log(SpawnPosition);
         }
+        if (other.gameObject.tag == "Pickups")
+        {
+            other.gameObject.GetComponent<RespawnCollectable>().collected = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
