@@ -6,6 +6,7 @@ public class GoombaAI : MonoBehaviour
 {
     private Vector3 direction;
     private Vector3 CurrentPos;
+    public AudioSource Kill;
     public int speed;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,13 @@ public class GoombaAI : MonoBehaviour
     {
       
         direction *= -1;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Kill.Play();
+        }
     }
     // Update is called once per frame
     void Update()
