@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class newPlayer : MonoBehaviour
 {
     public float speed;
     public GameObject Checkpointtext;
-    public Vector3 SpawnPosition;
+    private Vector3 SpawnPosition;
     //public Vector3 DefaultSpawnPos;
     public GameObject player;
     public AudioSource pickupsound;
-    public Transform playerbody;
-    public float mousesensitivity = 100f;
-    public float xRotation = 0f;
-    public float YRotation = 0f;
-    public float Jumpheight;
+    
+    public float Jumpheight = 0.05f;
     private float Yposition;
 
     public AudioSource Checkpoint;
@@ -69,13 +66,9 @@ public class Player : MonoBehaviour
         //move
         float Xaxis = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         float Yaxis = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        //rotate body, gives camera child rotate effect
-        float mouseX = Input.GetAxis("Mouse X") * mousesensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mousesensitivity * Time.deltaTime;
+        
 
-        xRotation -= mouseY;
-        YRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+       
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -85,9 +78,16 @@ public class Player : MonoBehaviour
         {
             Yposition = 0f;
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = speed + 4f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = speed - 4f;
+        }
 
         gameObject.transform.Translate(Xaxis, Yposition, Yaxis);
-        transform.localRotation = Quaternion.Euler(xRotation, YRotation, 0f);
-        playerbody.Rotate(Vector3.up * mouseX);
+        
     }
 }
