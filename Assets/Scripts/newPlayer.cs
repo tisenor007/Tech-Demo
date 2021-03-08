@@ -66,9 +66,7 @@ public class newPlayer : MonoBehaviour
         //move
         float Xaxis = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         float Yaxis = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        
-
-       
+     
 
         if (Input.GetButtonDown("Jump"))
         {
