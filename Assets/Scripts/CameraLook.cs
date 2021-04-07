@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraLook : MonoBehaviour
 {
+    public Transform cameraPos;
     public Transform playerbody;
-    public float mousesensitivity = 100f;
+    public float smoothSpeed = 0.125f;
+    
+    public float mouseSensitivity = 100f;
     public float xRotation = 0f;
     public float YRotation = 0f;
     
@@ -14,20 +17,28 @@ public class CameraLook : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-
+    private void FixedUpdate()
+    {
+        Vector3 desiredPosition = cameraPos.position;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
+        //transform.LookAt(playerbody);
+    }
     // Update is called once per frame
     void Update()
     {
 
-        float mouseX = Input.GetAxis("Mouse X") * mousesensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mousesensitivity * Time.deltaTime;
+        //float mouseX += Input.GetAxis("Mouse X") * mousesensitivity * Time.deltaTime;
+        xRotation += -Input.GetAxis("Mouse Y") * mouseSensitivity;
+        YRotation += Input.GetAxis("Mouse X") * mouseSensitivity;
 
-        xRotation -= mouseY;
-        YRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90, 90);
 
-        
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerbody.Rotate(Vector3.up * mouseX);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.localRotation = Quaternion.Euler(0, YRotation, 0);
+        playerbody.transform.localRotation = Quaternion.Euler(0, YRotation, 0);
+        //cameraPos.transform.localRotation = Quaternion.Euler(0, YRotation, 0);
+        //if (Input.GetKeyDown(KeyCode.Escape))
     }
 }

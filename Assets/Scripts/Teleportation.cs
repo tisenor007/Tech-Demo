@@ -5,7 +5,7 @@ using UnityEngine;
 public class Teleportation : MonoBehaviour
 {
     public GameObject DestinationPortal;
-    public GameObject Player;
+    
     private Vector3 destination;
     public int direction;
     public AudioSource portalsound;
@@ -24,8 +24,12 @@ public class Teleportation : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Player.transform.position = destination;
-        portalsound.Play();
+       
+        
+            other.gameObject.transform.position = destination;
+            portalsound.Play();
+        
+        
     }
 
     // Update is called once per frame

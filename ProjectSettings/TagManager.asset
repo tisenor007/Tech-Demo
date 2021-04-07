@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - Pickups
   - Enemy
+  - Death
   layers:
   - Default
   - TransparentFX

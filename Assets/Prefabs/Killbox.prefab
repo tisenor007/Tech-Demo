@@ -106,10 +106,9 @@ GameObject:
   - component: {fileID: 2238069663200305379}
   - component: {fileID: 6326809567982289590}
   - component: {fileID: 1949335890910065616}
-  - component: {fileID: 2179315443196828962}
   m_Layer: 0
   m_Name: Killbox
-  m_TagString: Killbox
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,16 +187,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2179315443196828962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078710903411755841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e58c463f06dfa94687ee30833dee15f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  death: {fileID: 0}

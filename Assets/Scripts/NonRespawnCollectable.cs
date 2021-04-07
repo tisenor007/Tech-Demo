@@ -5,15 +5,20 @@ using UnityEngine;
 public class NonRespawnCollectable : MonoBehaviour
 {
     // Start is called before the first frame update
-    public AudioSource pickupsound;
+    
     void Start()
     {
         
     }
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        pickupsound.Play();
+        if (other.tag == "Player")
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+       
+       
     }
     // Update is called once per frame
     void Update()

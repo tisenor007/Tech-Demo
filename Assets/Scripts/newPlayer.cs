@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class newPlayer : MonoBehaviour
 {
-    public float speed;
-    public GameObject Checkpointtext;
+    
+   
+
     private Vector3 SpawnPosition;
     //public Vector3 DefaultSpawnPos;
     public GameObject player;
-    public AudioSource pickupsound;
-    
-    public float Jumpheight = 0.05f;
+    private Rigidbody rb;
+    public float jumpHeight = 5.0f;
     private float Yposition;
+    public float speed;
 
-    public AudioSource Checkpoint;
+   
+    public AudioSource death;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        rb = GetComponent<Rigidbody>();
         SpawnPosition = player.transform.position;
         //DefaultSpawnPos = new Vector3(0.09f, 0.78f, -18.6f);
         Debug.Log(SpawnPosition);
@@ -30,18 +34,18 @@ public class newPlayer : MonoBehaviour
             player.transform.position = SpawnPosition;
             
         }
+        if (other.gameObject.tag == "Death")
+        {
+            death.Play();
+        }
         if (other.gameObject.tag == "Checkpoint")
         {
-            Checkpointtext.SetActive(true);
-            Debug.Log("Check Point Set!");
             SpawnPosition = player.transform.position;
-            Debug.Log(SpawnPosition);
-            Checkpoint.Play();
         }
         if (other.gameObject.tag == "Pickups")
         {
             other.gameObject.GetComponent<RespawnCollectable>().collected = true;
-            pickupsound.Play();
+           
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -52,30 +56,26 @@ public class newPlayer : MonoBehaviour
            
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Checkpoint")
-        {
-            Checkpointtext.SetActive(false);
-        }
-    }
+   
 
     // Update is called once per frame
     void Update()
     {
         //move
-        float Xaxis = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        float Yaxis = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-     
+        float Xaxis = Input.GetAxis("Horizontal") * speed;
+        float Zaxis = Input.GetAxis("Vertical") * speed;
+
+        Vector3 movePos = transform.right * Xaxis + transform.forward * Zaxis;
+        Vector3 newMovePos = new Vector3(movePos.x, rb.velocity.y, movePos.z);
+
+        rb.velocity = newMovePos;
+       
 
         if (Input.GetButtonDown("Jump"))
         {
-            Yposition = Jumpheight;
+            rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
         }
-        if (Input.GetButtonUp("Jump"))
-        {
-            Yposition = 0f;
-        }
+       
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed = speed + 4f;
@@ -84,8 +84,11 @@ public class newPlayer : MonoBehaviour
         {
             speed = speed - 4f;
         }
+        
 
-        gameObject.transform.Translate(Xaxis, Yposition, Yaxis);
+        //gameObject.transform.Translate(Xaxis, Yposition, Zaxis);
+
+       
         
     }
 }
