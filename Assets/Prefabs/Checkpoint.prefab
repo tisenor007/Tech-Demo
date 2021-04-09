@@ -201,9 +201,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: db109239ab88bcf49807c9c551966c63, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 716c0c2b588bede4e81938dbce586fd3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.29
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -277,7 +277,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointSound: {fileID: 3109822217881887215}
-  thisCheckPoint: {fileID: 791005566051787796}
   checkPointText: {fileID: 0}
 --- !u!1 &1067599512545255627
 GameObject:

@@ -7,15 +7,16 @@ public class MovingPlatform : MonoBehaviour
     //what points platform is going to be moving between, not score
     public Vector3[] points;
     public int pointNumber = 0;
-    private Vector3 current_target;
+    public bool automatic;
+    public AudioSource mechcanicalSound;
 
     public float tolerance;
     public float speed;
     public float lingerTime;
 
     private float lingerStart;
-
-    public bool automatic;
+    private Vector3 current_target;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,7 @@ public class MovingPlatform : MonoBehaviour
         transform.position += (heading / heading.magnitude) * speed * Time.deltaTime;
         if (heading.magnitude < tolerance)
         {
+            mechcanicalSound.Stop();
             transform.position = current_target;
             lingerStart = Time.time;
         }
@@ -61,6 +63,7 @@ public class MovingPlatform : MonoBehaviour
     }
     void NextPlatform()
     {
+        mechcanicalSound.Play();
         pointNumber++;
         if (pointNumber >= points.Length)
         {

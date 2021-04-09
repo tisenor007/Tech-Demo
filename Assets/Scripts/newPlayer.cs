@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class newPlayer : MonoBehaviour
 {
-    
-   
-
-    private Vector3 SpawnPosition;
     //public Vector3 DefaultSpawnPos;
     public GameObject player;
-    private Rigidbody rb;
     public float jumpHeight = 5.0f;
-    private float Yposition;
     public float speed;
-
-   
     public AudioSource death;
-    
-
+    public LayerMask layerMask;
+    public bool isGrounded;
+    private Vector3 SpawnPosition;
+    private Rigidbody rb;
+    private float Yposition;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,11 +64,12 @@ public class newPlayer : MonoBehaviour
         Vector3 newMovePos = new Vector3(movePos.x, rb.velocity.y, movePos.z);
 
         rb.velocity = newMovePos;
-       
 
-        if (Input.GetButtonDown("Jump"))
+        isGrounded = Physics.CheckSphere(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), 0.4f, layerMask);
+        
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpHeight, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + jumpHeight, rb.velocity.z);
         }
        
         if (Input.GetKeyDown(KeyCode.LeftShift))

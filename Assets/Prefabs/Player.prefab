@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922330297960451249}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -114,6 +114,10 @@ MonoBehaviour:
   jumpHeight: 5
   speed: 5
   death: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isGrounded: 0
 --- !u!54 &922330297960451147
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,7 +144,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3216ba646d636f643a8971c6b573593b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca259e6c9e149c04ba9bc8a5769b34fd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -274,7 +278,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8624292189946488355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -315,7 +319,7 @@ BoxCollider:
   m_GameObject: {fileID: 8624292189946488355}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
